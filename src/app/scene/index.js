@@ -1,3 +1,4 @@
+import play from "../zzfx";
 import CanvasEngine from "./engine";
 import GameLogic from "./logic";
 import {
@@ -12,6 +13,7 @@ import {
 import { FIELDS, FIELDS_BY_TYPE, SPEED_DIVIDER } from "../constants";
 import { spritesheet, font } from "../../assets/sprites";
 
+// const audioCtx = new AudioContext();
 const { CODE, EXIT } = FIELDS;
 
 const Scene = function (levels, screens) {
@@ -36,8 +38,12 @@ const Scene = function (levels, screens) {
   // state handlers (bit reactish:)
   //
   this.stateHandlers = {
-    gameOver: () => this.loadLevel(screens.GAME_OVER),
+    gameOver: () => {
+      play("ohno");
+      this.loadLevel(screens.GAME_OVER);
+    },
     levelFinished: () => {
+      play("yah");
       if (this.curentLevel + 1 < levels.length) {
         this.currentLevel++;
         if (this.currentLevel >= this.getLastestLevel())
@@ -211,7 +217,6 @@ const Scene = function (levels, screens) {
   // game start
   //
   this.run = () => {
-    // this.loadLevel(5);
     this.loadLevel(screens.LEVELS_MAP);
     waitForImages([spritesheet, font], () => {
       // make coloured font for code

@@ -4,6 +4,7 @@ import {
   DIRECTIONS_MAP,
   KEYMAPS,
 } from "../../constants";
+import play from "../../zzfx";
 import { stitchCode, Item } from "./helpers";
 
 const { CODE, PLAYER, EXIT, DEADLY_FIELD } = FIELDS;
@@ -61,7 +62,6 @@ const GameLogic = function (scene) {
     const { mv, x, y, type } = item,
       isPlayer = type === PLAYER.type;
     let moveable = false;
-
     if (mv) {
       moveable = true;
       const [newX, newY] = this.directionsMap[direction](x, y);
@@ -96,6 +96,7 @@ const GameLogic = function (scene) {
   };
   // move players (in fact special case of pushing objects):
   this.movePlayers = (direction) => {
+    let moved;
     if (this.interactive) {
       const players = [...this.pool]
         .filter(({ type }) => type === PLAYER.type)
@@ -106,9 +107,10 @@ const GameLogic = function (scene) {
         });
       for (const player of players) {
         if (!player.untouched) continue;
-        this.moveObj(player, direction);
+        moved = this.moveObj(player, direction);
         player.untouched = false;
       }
+      if (!moved && !this.finished) play("boink");
     }
     // finish level - but only if no player object is lost
     if (this.gameOver) {
@@ -116,6 +118,7 @@ const GameLogic = function (scene) {
     } else if (this.finished) {
       stateHandlers.levelFinished();
     }
+    // play("mov");
     this.execute();
   };
   // extract, fix and
@@ -140,6 +143,7 @@ const GameLogic = function (scene) {
   // remaps level according to objectsMap scheme
   // (should be done after each successful code execution)
   this.remap = function () {
+    let mutated;
     [...this.pool].forEach((field) => {
       if (
         this.objectsMap[field.type] !== CODE &&
@@ -148,8 +152,11 @@ const GameLogic = function (scene) {
         Object.assign(field, this.objectsMap[field.type]);
         field.resetState();
         field.startAnim("always", 60);
+        mutated = true;
       }
     });
+
+    if (mutated) play("mutate");
   };
   // dispose level's logic
   this.dispose = () => {
