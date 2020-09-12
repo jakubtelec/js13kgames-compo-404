@@ -123,9 +123,7 @@ const setField = (x, y, v, map) => {
     .join("");
 };
 
-export const getLevelsScreen = (levels, { currentLevel, lastLevel }) => {
-  lastLevel = 1000;
-  console.log(currentLevel);
+export const getLevelsScreen = (levels, { currentLevel, getLastestLevel }) => {
   const line = "____________",
     map = [line, "___cccccc___", "___cccccc___", line],
     code = [..."selectlevel:"],
@@ -137,7 +135,7 @@ export const getLevelsScreen = (levels, { currentLevel, lastLevel }) => {
     const lY = Math.ceil((idx + 1) / 4) * 3 + 1,
       lX = (idx % 4) * 3 + 1;
     setField(lX, lY, "c", map); // letter
-    if (idx < lastLevel + 1) {
+    if (idx < /*getLastestLevel() + 1 */ 1000) {
       setField(lX, lY + 1, "e", map);
       handlers.push((scene) => scene.loadLevel(idx));
     } else {

@@ -3,8 +3,6 @@ const retry = (scene) => scene.loadLevel(scene.currentLevel),
   levelMap = (scene) => scene.stateHandlers.levelMap(),
   next = (scene) => {
     scene.currentLevel++;
-    if (scene.currentLevel < scene.getLastestLevel())
-      localStorage.setItem("last_level", scene.currentLevel);
     scene.loadLevel(scene.currentLevel);
   };
 

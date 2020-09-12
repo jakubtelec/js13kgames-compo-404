@@ -21,7 +21,6 @@ const Scene = function (levels, screens) {
   this.getLastestLevel = () =>
     parseInt(localStorage.getItem("last_level") || 0);
 
-  this.lastLevel = this.getLastestLevel();
   this.currentLevel = this.getLastestLevel();
   //
   // prepare canvas engine
@@ -36,7 +35,13 @@ const Scene = function (levels, screens) {
   //
   this.stateHandlers = {
     gameOver: () => this.loadLevel(screens.GAME_OVER),
-    levelFinished: () => this.loadLevel(screens.WON),
+    levelFinished: () => {
+      this.currentLevel++;
+      if (this.currentLevel >= this.getLastestLevel())
+        localStorage.setItem("last_level", this.currentLevel);
+
+      this.loadLevel(screens.WON);
+    },
     levelMap: () => this.loadLevel(screens.LEVELS_MAP),
   };
 
@@ -109,10 +114,10 @@ const Scene = function (levels, screens) {
   // load level
   //
   this.loadLevel = (level) => {
+    screens.LEVELS_MAP = getLevelsScreen(levels, this);
     if (typeof level === "number") {
       this.currentLevel = level;
       level = levels[level];
-      screens.LEVELS_MAP = getLevelsScreen(levels, this);
     }
     const { map, code } = level,
       handlers = level.handlers || [];
