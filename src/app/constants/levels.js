@@ -30,7 +30,21 @@ const LEVELS_MAP = [
   },
   {
     // OK
-    // intro- double player
+    // intro- double player - something little bit more rough
+    map: [
+      "__ddd___dd",
+      "_p________",
+      "____ddd___",
+      "dddddddddd",
+      "rrrrrrrrrr",
+      "__________",
+      "_pd___d_de",
+      "____ddd___",
+    ],
+  },
+  {
+    // OK
+    // intro- double player - something little bit more rough
     map: [
       "__ddd___dd",
       "_p________",

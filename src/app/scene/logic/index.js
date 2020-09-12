@@ -23,14 +23,14 @@ const GameLogic = function (scene) {
   this.directionsMap = DIRECTIONS_MAP(width, height);
   // map of objects references => used when swapping objects
   this.objectsMap = { ...FIELDS_BY_TYPE };
+  //
   // main key listener
-
+  //
   const kListener = (e) => {
     const { keyCode } = e;
     if (KEYMAPS[keyCode]) this.movePlayers(KEYMAPS[keyCode]);
     if (keyCode == 27) stateHandlers.gameOver();
   };
-
   window.addEventListener("keydown", kListener, false);
   //
   // POOL TOOLS
@@ -100,7 +100,7 @@ const GameLogic = function (scene) {
     }
     return moveable;
   };
-  // move players (in fact special case of pushing objects):
+  // move players (in fact it's special case of pushing objects):
   this.movePlayers = (direction) => {
     this.somethingPushed = false;
     let moved;
@@ -128,6 +128,9 @@ const GameLogic = function (scene) {
     const mutated = this.execute();
     if (this.somethingPushed && !mutated) play("pusssh");
   };
+  //
+  // CODE HANDLING
+  //
   // extract, fix and
   // execute level code from level objects
   this.execute = function () {
@@ -147,7 +150,7 @@ const GameLogic = function (scene) {
         // console.log(e);
       }
   };
-  // remaps level according to objectsMap scheme
+  // remap level according to objectsMap scheme
   // (should be done after each successful code execution)
   this.remap = function () {
     let mutated;
@@ -165,6 +168,9 @@ const GameLogic = function (scene) {
     if (mutated) play("mutate");
     return mutated;
   };
+  //
+  // MAINTENANCE
+  //
   // dispose level's logic
   this.dispose = () => {
     [...this.pool].forEach((item) => item.resetState());

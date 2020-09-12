@@ -13,7 +13,6 @@ import {
 import { FIELDS, FIELDS_BY_TYPE, SPEED_DIVIDER } from "../constants";
 import { spritesheet, font } from "../../assets/sprites";
 
-// const audioCtx = new AudioContext();
 const { CODE, EXIT } = FIELDS;
 
 const Scene = function (levels, screens) {
@@ -53,9 +52,8 @@ const Scene = function (levels, screens) {
     },
     levelMap: () => this.loadLevel(screens.LEVELS_MAP),
   };
-
   //
-  // gameloop -> stiches logic with display
+  // gameloop -> basically stiches logic with canvas engine
   //
   this.engine.paintFrame = (delta) => {
     this.delta = delta;
@@ -77,14 +75,11 @@ const Scene = function (levels, screens) {
     // GLITCH LOGIC HEREEEE !
     if (glitched) glitchCanvas(this.engine.ctx.canvas, ctx, glitchDef);
   };
-
   //
-  // glitcher
+  // glitcher - distorts canvas from time to time
   //
-
-  let glitched = false;
-  let glitchDef = {};
-
+  let glitched = false,
+    glitchDef = {};
   this.glitch = () => {
     glitched = true;
     glitchDef = {
@@ -108,7 +103,6 @@ const Scene = function (levels, screens) {
       setTimeout(this.glitch, rndInt(200, 1000));
     }, rndInt(200, 300));
   };
-
   //
   // recalc field size (= board size) and movement speed
   //
@@ -120,7 +114,7 @@ const Scene = function (levels, screens) {
     this.moveSpeed = this.fieldSize / SPEED_DIVIDER;
   };
   //
-  // load level
+  // load level data
   //
   this.loadLevel = (level) => {
     if (this.gameLogic) this.gameLogic.dispose();
@@ -215,7 +209,8 @@ const Scene = function (levels, screens) {
     );
   };
   //
-  // game start
+  // prepare assets, load important stuff, calc some
+  // resources and run game
   //
   this.run = () => {
     this.loadLevel(screens.LEVELS_MAP);

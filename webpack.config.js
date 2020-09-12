@@ -7,6 +7,7 @@ const isProduction = process.env.npm_lifecycle_event === "build";
 
 const plugins = [
   new HtmlWebpackPlugin({
+    favicon: "src/favicon.png",
     template: "src/index.html",
     minify: isProduction && {
       collapseWhitespace: true,
