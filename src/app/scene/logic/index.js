@@ -49,9 +49,7 @@ const GameLogic = function (scene) {
       frame: def.defFrame,
       val: v,
     });
-    if (item.animDefs.always) {
-      item.startAnim("always", 60);
-    }
+    item.startAnim("always", 60);
     this.pool.add(item);
     return item;
   };
@@ -149,6 +147,7 @@ const GameLogic = function (scene) {
       ) {
         Object.assign(field, this.objectsMap[field.type]);
         field.resetState();
+        field.startAnim("always", 60);
       }
     });
   };

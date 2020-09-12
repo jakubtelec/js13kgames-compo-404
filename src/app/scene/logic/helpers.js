@@ -27,6 +27,7 @@ export const Item = function ({ x, y, ...rest }) {
   Object.assign(this, rest);
   this.animations = {};
   this.startAnim = function (type, speed = 50) {
+    if (!this.animDefs[type]) return;
     const frames = this.animDefs[type];
     let index = 0;
     if (!this.animations[type])

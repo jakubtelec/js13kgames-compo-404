@@ -139,8 +139,8 @@ export const getLevelsScreen = (levels, { currentLevel, getLastestLevel }) => {
       setField(lX, lY + 1, "e", map);
       handlers.push((scene) => scene.loadLevel(idx));
     } else {
-      setField(lX, lY + 1, "i", map);
-    } // exits
+      setField(lX, lY + 1, "i", map); // closed exit
+    }
     idx === currentLevel &&
       setField(lX < 4 ? lX + 1 : lX - 1, lY + 1, "p", map);
     code.push(String(idx + 1));

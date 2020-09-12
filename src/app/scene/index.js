@@ -18,8 +18,10 @@ const Scene = function (levels, screens) {
   //
   // local storage managment
   //
-  this.getLastestLevel = () =>
-    parseInt(localStorage.getItem("last_level") || 0);
+  this.getLastestLevel = () => {
+    const lastL = parseInt(localStorage.getItem("last_level") || 0);
+    return lastL >= levels.length ? levels.length - 1 : lastL;
+  };
 
   this.currentLevel = this.getLastestLevel();
   //
@@ -36,10 +38,11 @@ const Scene = function (levels, screens) {
   this.stateHandlers = {
     gameOver: () => this.loadLevel(screens.GAME_OVER),
     levelFinished: () => {
-      this.currentLevel++;
-      if (this.currentLevel >= this.getLastestLevel())
-        localStorage.setItem("last_level", this.currentLevel);
-
+      if (this.curentLevel + 1 < levels.length) {
+        this.currentLevel++;
+        if (this.currentLevel >= this.getLastestLevel())
+          localStorage.setItem("last_level", this.currentLevel);
+      }
       this.loadLevel(screens.WON);
     },
     levelMap: () => this.loadLevel(screens.LEVELS_MAP),
