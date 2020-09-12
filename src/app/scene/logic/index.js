@@ -59,6 +59,7 @@ const GameLogic = function (scene) {
   //
   // push objects
   this.moveObj = function (item, direction) {
+    let push;
     const { mv, x, y, type } = item,
       isPlayer = type === PLAYER.type;
     let moveable = false;
@@ -75,13 +76,18 @@ const GameLogic = function (scene) {
         if (neighbour.type === EXIT.type) {
           if (neighbour.handler) {
             neighbour.handler(scene);
+            // return true to avoid spund - should be fixed
+            return true;
           } else {
             this.finished = true;
           }
         }
       }
-      if (neighbour && neighbour.type)
+      if (neighbour && neighbour.type) {
         moveable = this.moveObj(neighbour, direction);
+        if (moveable) this.somethingPushed = true;
+      }
+
       if (moveable) {
         this.interactive = false;
         item.x = newX;
@@ -96,6 +102,7 @@ const GameLogic = function (scene) {
   };
   // move players (in fact special case of pushing objects):
   this.movePlayers = (direction) => {
+    this.somethingPushed = false;
     let moved;
     if (this.interactive) {
       const players = [...this.pool]
@@ -118,8 +125,8 @@ const GameLogic = function (scene) {
     } else if (this.finished) {
       stateHandlers.levelFinished();
     }
-    // play("mov");
-    this.execute();
+    const mutated = this.execute();
+    if (this.somethingPushed && !mutated) play("pusssh");
   };
   // extract, fix and
   // execute level code from level objects
@@ -135,7 +142,7 @@ const GameLogic = function (scene) {
       try {
         // console.log(code);
         eval(code);
-        this.remap();
+        return this.remap();
       } catch (e) {
         // console.log(e);
       }
@@ -155,8 +162,8 @@ const GameLogic = function (scene) {
         mutated = true;
       }
     });
-
     if (mutated) play("mutate");
+    return mutated;
   };
   // dispose level's logic
   this.dispose = () => {

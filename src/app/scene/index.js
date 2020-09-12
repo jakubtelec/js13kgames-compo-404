@@ -123,8 +123,10 @@ const Scene = function (levels, screens) {
   // load level
   //
   this.loadLevel = (level) => {
+    if (this.gameLogic) this.gameLogic.dispose();
     screens.LEVELS_MAP = getLevelsScreen(levels, this);
     if (typeof level === "number") {
+      play("bonjour");
       this.currentLevel = level;
       level = levels[level];
     }
@@ -132,7 +134,6 @@ const Scene = function (levels, screens) {
       handlers = level.handlers || [];
     this.height = map.length;
     this.width = map[0].length;
-    if (this.gameLogic) this.gameLogic.dispose();
     this.gameLogic = new GameLogic(this);
     // load level data from tables
     let cCounter = 0,
@@ -141,7 +142,7 @@ const Scene = function (levels, screens) {
       for (let x = 0; x < this.width; x++) {
         const item = map[y][x];
         if (item !== "_") {
-          if (item === "c") {
+          if (item === CODE.type) {
             this.gameLogic.addItem(x, y, CODE, code[cCounter]);
             cCounter++;
           } else {
