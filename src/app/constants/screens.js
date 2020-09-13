@@ -13,12 +13,15 @@ const SCREENS = {
   GAME_OVER: {
     map: [
       "___________",
+      "____ccc____",
+      "___________",
       "_cccc_cccc_",
+      "___________",
       "___c___c___",
       "___e_p_e___",
       "___________",
     ],
-    code: [..."gameover".split(""), "retry", "menu"],
+    code: [..."404gameover".split(""), "retry", "menu"],
     handlers: [retry, levelMap],
   },
   GAME_START: {
