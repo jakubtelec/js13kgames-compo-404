@@ -55,7 +55,10 @@ const Scene = function (levels, screens) {
       }
       this.loadLevel(screens.LEVEL_FINISHED);
     },
-    levelMap: () => this.loadLevel(screens.LEVELS_MAP),
+    levelMap: () => {
+      play("menu");
+      this.loadLevel(screens.LEVELS_MAP);
+    },
   };
   //
   // gameloop -> basically stiches logic with canvas engine
@@ -218,9 +221,8 @@ const Scene = function (levels, screens) {
   // resources and run game
   //
   this.run = () => {
-    // this.loadLevel(10);
-    this.loadLevel(screens.LEVELS_MAP);
-    // this.loadLevel(screens.GAME_FINISHED);
+    this.loadLevel(screens.GAME_START);
+    // this.loadLevel(levels[10]);
     waitForImages([spritesheet, font], () => {
       // make coloured font for code
       this.greyFont = swapColors(font, [255, 255, 255], [128, 128, 128]);

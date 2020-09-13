@@ -1,5 +1,9 @@
 // screen exits handlers
 const retry = (scene) => scene.loadLevel(scene.currentLevel),
+  retryWon = (scene) => {
+    (scene.currentLevel = scene.currentLevel - 1),
+      scene.loadLevel(scene.currentLevel);
+  },
   levelMap = (scene) => scene.stateHandlers.levelMap(),
   next = (scene) => {
     scene.loadLevel(scene.currentLevel);
@@ -17,7 +21,20 @@ const SCREENS = {
     code: [..."gameover".split(""), "retry", "menu"],
     handlers: [retry, levelMap],
   },
-
+  GAME_START: {
+    map: [
+      "________________________",
+      "_________ccccc__________",
+      "________________________",
+      "____ccccccc_cccccccc____",
+      "_cccc_ccc_ccccc_ccccccc_",
+      "________________________",
+      "_________p___e__________",
+      "________________________",
+    ],
+    code: [...`byte!deliveryourself(andplsavoiderrors)`.split("")],
+    handlers: [levelMap],
+  },
   LEVEL_FINISHED: {
     map: [
       "___________",
@@ -30,7 +47,7 @@ const SCREENS = {
       "___________",
     ],
     code: [..."levelfinished!".split(""), "retry", "menu", "next"],
-    handlers: [retry, levelMap, next],
+    handlers: [retryWon, levelMap, next],
   },
   GAME_FINISHED: {
     map: [

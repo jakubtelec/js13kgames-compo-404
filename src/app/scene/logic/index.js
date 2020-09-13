@@ -117,16 +117,17 @@ const GameLogic = function (scene) {
         moved = this.moveObj(player, direction);
         player.untouched = false;
       }
-      if (!moved && !this.finished) play("boink");
+      if (!moved && !this.finished && !this.gameOver) play("boink");
+
+      // finish level - but only if no player object is lost
+      if (this.gameOver) {
+        stateHandlers.gameOver();
+      } else if (this.finished) {
+        stateHandlers.levelFinished();
+      }
+      const mutated = this.execute();
+      if (this.somethingPushed && !mutated) play("pusssh");
     }
-    // finish level - but only if no player object is lost
-    if (this.gameOver) {
-      stateHandlers.gameOver();
-    } else if (this.finished) {
-      stateHandlers.levelFinished();
-    }
-    const mutated = this.execute();
-    if (this.somethingPushed && !mutated) play("pusssh");
   };
   //
   // CODE HANDLING

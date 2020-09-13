@@ -30,7 +30,7 @@ const LEVELS_MAP = [
   },
   {
     // OK
-    // intro- double player - something little bit more rough
+    // intro- double player - something little bit harder
     map: [
       "__ddd___dd",
       "_p________",
@@ -41,6 +41,11 @@ const LEVELS_MAP = [
       "_pd___d_de",
       "____ddd___",
     ],
+  },
+  {
+    // OK
+    map: ["__b___b___", "_bbb_bbb__", "_bpb_bpbe_", "_bbb_bbb__", "__b___br__"],
+    code: ["="],
   },
   {
     // multiplayers generation - change object into yourself
@@ -58,19 +63,6 @@ const LEVELS_MAP = [
     code: ["="],
   },
   {
-    // OK
-    // some variables stuff
-    //
-    map: [
-      "_p_____r_______",
-      "_____c_r_______",
-      "_cccb__r_______",
-      "__ccc__r_______",
-      "_______r__dcc_e",
-    ],
-    code: ["x", "var", "x", "=", "var", "y", "=", "=", "y"],
-  },
-  {
     // multiplayers generation - change object into yourself remix
     // harder
     map: [
@@ -85,6 +77,21 @@ const LEVELS_MAP = [
       "_______e__",
     ],
     code: ["="],
+  },
+  {
+    // OK
+    // multipleplayer - pretty hard
+    map: [
+      "____b_b___p",
+      "_r_rbrbr_r_",
+      "bbbbbbbbbbb",
+      "_r_rbrbr_r_",
+      "d_bbbebbb_d",
+      "_r_rbrbr_r_",
+      "bbbbbbbbbbb",
+      "_r_rbrbr_r_",
+      "p___b_b____",
+    ],
   },
   {
     // three players
@@ -152,12 +159,6 @@ const LEVELS_MAP = [
       "___________",
     ],
   },
-  // {
-  //   map: ["_____p_____", "_____e_____"],
-  // },
-  // {
-  //   map: ["_____p_____", "_____e_____"],
-  // },
 ];
 
 export default LEVELS_MAP;
