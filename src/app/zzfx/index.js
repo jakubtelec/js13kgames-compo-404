@@ -102,6 +102,7 @@ const zzfx = (
 };
 
 const zzfxX = new (window.AudioContext || webkitAudioContext)();
+
 const zzfxR = 44100;
 
 const play = (name) => SOUNDS[name] && zzfx(...SOUNDS[name]);

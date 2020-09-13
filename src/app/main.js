@@ -1,7 +1,7 @@
 import Scene from "./scene";
 import LEVELS_MAP from "./constants/levels";
-import { GAME_OVER, WON } from "./constants/screens";
+import SCREENS from "./constants/screens";
 
-const game = new Scene(LEVELS_MAP, { GAME_OVER, WON, LEVELS_MAP });
+const game = new Scene(LEVELS_MAP, SCREENS);
 
 game.run();

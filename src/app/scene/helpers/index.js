@@ -86,7 +86,6 @@ const glitchColorData = (
       if (remove) {
         imagedata.data[i] = imagedata.data[i + 1] = imagedata.data[i + 2] = 0;
       }
-
       const [r, g, b] = color;
       imagedata.data[i + realStep + mod] = r;
       imagedata.data[i + 1 + realStep + mod] = g;
@@ -135,7 +134,8 @@ export const getLevelsScreen = (levels, { currentLevel, getLastestLevel }) => {
     const lY = Math.ceil((idx + 1) / 4) * 3 + 1,
       lX = (idx % 4) * 3 + 1;
     setField(lX, lY, "c", map); // letter
-    if (idx < /*getLastestLevel() + 1 */ 1000) {
+    // if (idx < /*getLastestLevel() + 1 */ 1000) {
+    if (idx < getLastestLevel() + 1) {
       setField(lX, lY + 1, "e", map);
       handlers.push((scene) => scene.loadLevel(idx));
     } else {

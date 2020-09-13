@@ -43,12 +43,17 @@ const Scene = function (levels, screens) {
     },
     levelFinished: () => {
       play("yah");
-      if (this.curentLevel + 1 < levels.length) {
+
+      if (this.currentLevel + 1 < levels.length) {
         this.currentLevel++;
         if (this.currentLevel >= this.getLastestLevel())
           localStorage.setItem("last_level", this.currentLevel);
+      } else if (this.currentLevel + 1 === levels.length) {
+        localStorage.setItem("last_level", this.currentLevel);
+        this.loadLevel(screens.GAME_FINISHED);
+        return;
       }
-      this.loadLevel(screens.WON);
+      this.loadLevel(screens.LEVEL_FINISHED);
     },
     levelMap: () => this.loadLevel(screens.LEVELS_MAP),
   };
@@ -71,8 +76,7 @@ const Scene = function (levels, screens) {
     ctx.fill();
     // paint items
     for (const item of [...this.gameLogic.pool]) this.paintItem(item);
-    // GLITCH
-    // GLITCH LOGIC HEREEEE !
+    // glitch canvas
     if (glitched) glitchCanvas(this.engine.ctx.canvas, ctx, glitchDef);
   };
   //
@@ -118,6 +122,7 @@ const Scene = function (levels, screens) {
   //
   this.loadLevel = (level) => {
     if (this.gameLogic) this.gameLogic.dispose();
+    this.gameLogic = null;
     screens.LEVELS_MAP = getLevelsScreen(levels, this);
     if (typeof level === "number") {
       play("bonjour");
@@ -213,7 +218,9 @@ const Scene = function (levels, screens) {
   // resources and run game
   //
   this.run = () => {
+    // this.loadLevel(10);
     this.loadLevel(screens.LEVELS_MAP);
+    // this.loadLevel(screens.GAME_FINISHED);
     waitForImages([spritesheet, font], () => {
       // make coloured font for code
       this.greyFont = swapColors(font, [255, 255, 255], [128, 128, 128]);

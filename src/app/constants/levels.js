@@ -43,26 +43,41 @@ const LEVELS_MAP = [
     ],
   },
   {
-    // OK
-    // intro- double player - something little bit more rough
-    map: [
-      "__ddd___dd",
-      "_p________",
-      "____ddd___",
-      "dddddddddd",
-      "rrrrrrrrrr",
-      "__________",
-      "_pd___d_de",
-      "____ddd___",
-    ],
-  },
-  {
     // multiplayers generation - change object into yourself
     // quite hard
     map: [
       "__________",
-      "_p_rc_b___",
+      "___rc_b__p",
       "__________",
+      "rrrrrrbrrr",
+      "rrrrrrbrrr",
+      "rrrrrrbrrr",
+      "__________",
+      "_______e__",
+    ],
+    code: ["="],
+  },
+  {
+    // OK
+    // some variables stuff
+    //
+    map: [
+      "_p_____r_______",
+      "_____c_r_______",
+      "_cccb__r_______",
+      "__ccc__r_______",
+      "_______r__dcc_e",
+    ],
+    code: ["x", "var", "x", "=", "var", "y", "=", "=", "y"],
+  },
+  {
+    // multiplayers generation - change object into yourself remix
+    // harder
+    map: [
+      "__________",
+      "___rc_b__p",
+      "__________",
+      "rrrrrrbrrr",
       "rrrrrrbrrr",
       "rrrrrrbrrr",
       "rrrrrrbrrr",
@@ -87,20 +102,62 @@ const LEVELS_MAP = [
     code: ["="],
   },
   {
-    // multiplayers generation - change object into yourself
-    // remix - very hard
+    // OK
+    // multipleplayer - pretty hard
     map: [
-      "__________",
-      "_p_rc_b___",
-      "__________",
-      "rrrrrrbrrr",
-      "rrrrrr_rrr",
-      "rrrrrr_rrr",
-      "dddddd_ddd",
-      "_______e__",
+      "d_pd_d_d__d",
+      "________p__",
+      "_d_e_d_e_d_",
+      "___________",
+      "_d_d_d_d_d_",
+      "___________",
+      "_d_e_d_e_d_",
+      "__p________",
+      "d__d_d_dp_d",
     ],
-    code: ["="],
   },
+  {
+    // OK
+    // big square - one pattern to solve
+    map: [
+      "_____p_r_____",
+      "_bbbbbbbbbbb_",
+      "_bbbbbbbbbbb_",
+      "_bbbbbbbbbbb_",
+      "_bbbbbbbbbbb_",
+      "_bbbbbbrbbbb_",
+      "_bbbbbebbbbb_",
+      "_bbbbbbbbbbb_",
+      "_bbbbbbbbbbb_",
+      "_bbbbbbbbbbb_",
+      "_bbbbbbbbbbb_",
+      "_bbbbbbbbbbb_",
+      "_______r_____",
+    ],
+  },
+  {
+    // OK
+    // big square - one pattern to solve
+    map: [
+      "_____p_____",
+      "_bbbbbbbbb_",
+      "_bbbbbbbbb_",
+      "_bbbbbbbbb_",
+      "_bbbbrbbbb_",
+      "_bbbe_bbbb_",
+      "_bbrbbbbbb_",
+      "_bbbbbbbbb_",
+      "_bbbbbbbbb_",
+      "_bbbbbbbbb_",
+      "___________",
+    ],
+  },
+  // {
+  //   map: ["_____p_____", "_____e_____"],
+  // },
+  // {
+  //   map: ["_____p_____", "_____e_____"],
+  // },
 ];
 
 export default LEVELS_MAP;

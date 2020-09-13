@@ -59,7 +59,6 @@ const GameLogic = function (scene) {
   //
   // push objects
   this.moveObj = function (item, direction) {
-    let push;
     const { mv, x, y, type } = item,
       isPlayer = type === PLAYER.type;
     let moveable = false;
@@ -85,7 +84,8 @@ const GameLogic = function (scene) {
       }
       if (neighbour && neighbour.type) {
         moveable = this.moveObj(neighbour, direction);
-        if (moveable) this.somethingPushed = true;
+        if (moveable && neighbour.type !== PLAYER.type)
+          this.somethingPushed = true;
       }
 
       if (moveable) {
