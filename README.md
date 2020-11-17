@@ -4,6 +4,8 @@
 
 Tiny game made for [js13kGames](https://js13kgames.com/) competition.
 
+(31st place overall, check [entry site](https://js13kgames.com/entries/byte-deliver-yourself))
+
 Try last build [HERE](https://byte-woad.vercel.app)
 
 Built on homebrewed, `canvas`-based, unnamed and lightweight game engine :)
