@@ -1,7 +1,5 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
-const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 
 const isProduction = process.env.npm_lifecycle_event === "build";
 
@@ -14,8 +12,6 @@ const plugins = [
     },
     inlineSource: isProduction && ".(js|css)$",
   }),
-  new HtmlWebpackInlineSourcePlugin(),
-  new OptimizeCssAssetsPlugin({}),
   new MiniCssExtractPlugin({
     filename: "[name].css",
   }),
@@ -41,9 +37,5 @@ module.exports = {
       },
     ],
   },
-  plugins,
-  devServer: {
-    stats: "minimal",
-    overlay: true,
-  },
+  plugins
 };
